@@ -4,7 +4,7 @@ from typing import Annotated
 from fastapi import Depends, FastAPI, HTTPException
 from pydantic import BaseModel
 
-from .llm import LLM, GroqLLM
+from .llm import LLM, make_llm
 
 app = FastAPI(title="Conversation Assistant")
 SESSIONS: dict[str, list[dict]] = {}
@@ -24,7 +24,7 @@ class MessageOut(BaseModel):
 
 
 def get_llm() -> LLM:
-    return GroqLLM()
+    return make_llm()
 
 
 @app.post("/sessions")
