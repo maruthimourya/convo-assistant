@@ -1,0 +1,42 @@
+# CI = "Continuous Integration": GitHub runs this on a fresh Linux machine
+# every time you push code or open a pull request.
+name: CI
+
+# WHEN to run: on every push to any branch, and on every pull request.
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    # WHERE to run: a clean Ubuntu machine that GitHub provides for free.
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Download your repo's code onto that machine.
+      - uses: actions/checkout@v4
+
+      # 2. Install uv (the same tool you use on your Mac).
+      #    enable-cache makes later runs faster by reusing downloaded packages.
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+
+      # 3. Install Python (version from .python-version) and every package
+      #    exactly as pinned in uv.lock. --locked fails the run if uv.lock
+      #    is out of date with pyproject.toml, so CI never guesses versions.
+      - name: Install dependencies
+        run: uv sync --locked
+
+      # 4. Lint: same check you ran locally. Fails on code problems.
+      - name: Lint
+        run: uv run ruff check .
+
+      # 5. Formatting: --check only reports, it does not change files.
+      #    Fails if any file isn't formatted the way `ruff format` would do it.
+      - name: Check formatting
+        run: uv run ruff format --check .
+
+      # 6. Run the tests. They use the fake LLM, so no API key is needed here.
+      - name: Run tests
+        run: uv run pytest -q
