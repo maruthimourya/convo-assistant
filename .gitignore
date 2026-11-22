@@ -18,3 +18,4 @@ models/
 # Generated outputs (regenerate with scripts)
 outputs/*.npy
 outputs/*.txt
+notebooks/
