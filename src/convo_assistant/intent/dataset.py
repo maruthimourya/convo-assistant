@@ -28,7 +28,7 @@ HOW WE LOAD IT:
   caches JARs in ~/.gradle/.
 """
 
-from datasets import load_dataset, DatasetDict
+from datasets import DatasetDict, load_dataset
 
 
 def load_banking77() -> DatasetDict:
@@ -76,7 +76,7 @@ def describe(ds: DatasetDict) -> None:
     print(f"Test     : {len(ds['test']):,} examples")
     print(f"Labels   : {len(names)} intents")
     print(f"First 5  : {names[:5]}")
-    print(f"\nSample row:")
+    print("\nSample row:")
     row = ds["train"][0]
     print(f"  text  = {row['text']!r}")
     print(f"  label = {row['label']} → {names[row['label']]!r}")

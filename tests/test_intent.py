@@ -10,9 +10,9 @@ like using a FakeRepository in your Android tests.
 """
 
 import pytest
+
 from convo_assistant.intent.baseline import build_tfidf_lr_pipeline, train
 from convo_assistant.intent.evaluate import compute_metrics
-
 
 # ── Fixtures: tiny fake dataset ──────────────────────────────
 # In pytest, a @pytest.fixture is like a @Before setup method

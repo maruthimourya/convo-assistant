@@ -18,8 +18,8 @@ main() that wires everything together and runs it.
 import time
 from pathlib import Path
 
-from convo_assistant.intent.dataset import describe, label_names, load_banking77
 from convo_assistant.intent.baseline import build_tfidf_lr_pipeline, train
+from convo_assistant.intent.dataset import describe, label_names, load_banking77
 from convo_assistant.intent.evaluate import compute_metrics, plot_confusion_matrix
 
 
