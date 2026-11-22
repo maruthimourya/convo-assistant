@@ -14,3 +14,7 @@ __pycache__/
 
 # Trained model weights (too large for git)
 models/
+
+# Generated outputs (regenerate with scripts)
+outputs/*.npy
+outputs/*.txt
