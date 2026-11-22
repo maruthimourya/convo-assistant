@@ -38,8 +38,9 @@ def main() -> None:
     train_labels = np.load(OUT_DIR / "banking77_train_labels.npy")
 
     model = SentenceTransformer(MODEL_NAME)
-    test_vecs = model.encode(test_texts, batch_size=64, normalize_embeddings=True,
-                             show_progress_bar=False)
+    test_vecs = model.encode(
+        test_texts, batch_size=64, normalize_embeddings=True, show_progress_bar=False
+    )
     sims = test_vecs @ train_vecs.T
     nearest = np.argmax(sims, axis=1)
     scores = sims[np.arange(len(test_texts)), nearest]
@@ -52,19 +53,29 @@ def main() -> None:
     print("=== Wrong predictions involving the watched intents ===")
     for i in np.where(~correct)[0]:
         if test_labels[i] in watched_ids or predictions[i] in watched_ids:
-            print(f"  score={scores[i]:.3f}  true={names[test_labels[i]]}  "
-                  f"predicted={names[predictions[i]]}")
+            print(
+                f"  score={scores[i]:.3f}  true={names[test_labels[i]]}  "
+                f"predicted={names[predictions[i]]}"
+            )
             print(f"      text: {test_texts[i]!r}")
 
     print("\n=== Trusting only matches at or above a cutoff ===")
-    print(f"{'cutoff':>6} {'answered':>9} {'accuracy on answered':>21} {'lost wrong (confident)':>23}")
+    print(
+        f"{'cutoff':>6} {'answered':>9} {'accuracy on answered':>21} {'lost wrong (confident)':>23}"
+    )
     for cutoff in CUTOFFS:
         answered = scores >= cutoff
         acc = correct[answered].mean() * 100 if answered.any() else float("nan")
         lost_wrong = int(np.sum(answered & ~correct & (test_labels == lost)))
-        print(f"{cutoff:>6.2f} {answered.mean() * 100:8.1f}% {acc:20.1f}% {lost_wrong:23d}")
-    print(f"\nScore range, correct matches: {scores[correct].min():.3f} to {scores[correct].max():.3f}")
-    print(f"Score range, wrong matches:   {scores[~correct].min():.3f} to {scores[~correct].max():.3f}")
+        print(
+            f"{cutoff:>6.2f} {answered.mean() * 100:8.1f}% {acc:20.1f}% {lost_wrong:23d}"
+        )
+    print(
+        f"\nScore range, correct matches: {scores[correct].min():.3f} to {scores[correct].max():.3f}"
+    )
+    print(
+        f"Score range, wrong matches:   {scores[~correct].min():.3f} to {scores[~correct].max():.3f}"
+    )
 
 
 if __name__ == "__main__":

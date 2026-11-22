@@ -36,16 +36,16 @@ def main() -> None:
     # Extract the raw text and label arrays from the dataset.
     # In Kotlin terms: ds["train"] is like a List<DataRow>,
     # and we're pulling out two parallel lists: texts and labels.
-    train_texts = ds["train"]["text"]    # List[str], 10,003 items
+    train_texts = ds["train"]["text"]  # List[str], 10,003 items
     train_labels = ds["train"]["label"]  # List[int], 10,003 items
-    test_texts = ds["test"]["text"]      # List[str],  3,080 items
-    test_labels = ds["test"]["label"]    # List[int],  3,080 items
+    test_texts = ds["test"]["text"]  # List[str],  3,080 items
+    test_labels = ds["test"]["label"]  # List[int],  3,080 items
 
     # ── Step 2: Build and train the pipeline ─────────────────
     print("\n🔧 Building TF-IDF + Logistic Regression pipeline...")
     pipeline = build_tfidf_lr_pipeline(
         max_features=10_000,  # vocabulary size
-        ngram_range=(1, 2),   # unigrams + bigrams
+        ngram_range=(1, 2),  # unigrams + bigrams
     )
 
     print("🏋️ Training... (this usually takes 10-30 seconds)")
@@ -63,7 +63,9 @@ def main() -> None:
     metrics = compute_metrics(test_labels, y_pred, label_names=names)
 
     print(f"\n📊 Overall accuracy: {metrics['accuracy']:.4f}")
-    print(f"   ({metrics['accuracy'] * 100:.1f}% of 3,080 test messages classified correctly)\n")
+    print(
+        f"   ({metrics['accuracy'] * 100:.1f}% of 3,080 test messages classified correctly)\n"
+    )
     print("Per-intent Precision / Recall / F1:")
     print(metrics["report_str"])
 
@@ -71,7 +73,9 @@ def main() -> None:
     out_dir = Path("outputs")
     out_dir.mkdir(exist_ok=True)
     cm_path = plot_confusion_matrix(
-        test_labels, y_pred, label_names=names,
+        test_labels,
+        y_pred,
+        label_names=names,
         save_path=out_dir / "confusion_matrix.png",
     )
     print(f"\n🎉 Done! Check {cm_path} for the confusion matrix heatmap.")

@@ -101,7 +101,9 @@ def main() -> None:
     out_dir = Path("outputs")
     out_dir.mkdir(exist_ok=True)
     cm_path = plot_confusion_matrix(
-        test_labels, y_pred, label_names=names,
+        test_labels,
+        y_pred,
+        label_names=names,
         save_path=out_dir / "confusion_matrix_transformer.png",
     )
 

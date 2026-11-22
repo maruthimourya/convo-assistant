@@ -38,7 +38,9 @@ def report(method: str, preds: np.ndarray, true: np.ndarray, names: list[str]) -
     for name in WATCHED:
         idx = names.index(name)
         mask = true == idx
-        print(f"  {name:<24} {correct[mask].mean() * 100:5.1f}%  ({mask.sum()} messages)")
+        print(
+            f"  {name:<24} {correct[mask].mean() * 100:5.1f}%  ({mask.sum()} messages)"
+        )
     lost_as_nw = int(np.sum((true == lost) & (preds == not_working)))
     nw_as_lost = int(np.sum((true == not_working) & (preds == lost)))
     print(f"  card_lost predicted as card_not_working: {lost_as_nw}")
@@ -56,8 +58,9 @@ def main() -> None:
     # Method 1: semantic search, using the vectors saved in Step 3.
     train_vecs = np.load(OUT_DIR / "banking77_train_embeddings.npy")
     model = SentenceTransformer(MODEL_NAME)
-    test_vecs = model.encode(test_texts, batch_size=64, normalize_embeddings=True,
-                             show_progress_bar=False)
+    test_vecs = model.encode(
+        test_texts, batch_size=64, normalize_embeddings=True, show_progress_bar=False
+    )
     semantic_preds = train_labels[np.argmax(test_vecs @ train_vecs.T, axis=1)]
     report("Semantic search (nearest neighbour)", semantic_preds, test_labels, names)
 

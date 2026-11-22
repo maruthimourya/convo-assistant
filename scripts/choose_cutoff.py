@@ -54,7 +54,9 @@ def main() -> None:
     store_idx, val_idx = order[:cut], order[cut:]
     store_vecs, store_labels = all_vecs[store_idx], all_labels[store_idx]
     val_vecs, val_labels = all_vecs[val_idx], all_labels[val_idx]
-    print(f"Search store: {len(store_idx):,} messages   Validation: {len(val_idx):,} messages")
+    print(
+        f"Search store: {len(store_idx):,} messages   Validation: {len(val_idx):,} messages"
+    )
 
     def search(query_vecs):
         sims = query_vecs @ store_vecs.T
@@ -64,7 +66,9 @@ def main() -> None:
     val_scores, val_preds = search(val_vecs)
 
     print("\n=== Validation (used to choose the cutoff) ===")
-    print(f"{'cutoff':>6} {'answered':>9} {'acc on answered':>16} {'confident card_lost wrong':>26}")
+    print(
+        f"{'cutoff':>6} {'answered':>9} {'acc on answered':>16} {'confident card_lost wrong':>26}"
+    )
     chosen = None
     for c in CUTOFFS:
         rate, acc, lw = evaluate(val_scores, val_preds, val_labels, c, lost_id)
@@ -75,25 +79,37 @@ def main() -> None:
             chosen = c
 
     if chosen is None:
-        print("\nNo cutoff meets the rule on validation. Do not ship semantic search yet.")
+        print(
+            "\nNo cutoff meets the rule on validation. Do not ship semantic search yet."
+        )
         return
 
     print(f"\nChosen cutoff (lowest that meets the rule): {chosen:.2f}")
 
     # 4. Test set, reported once, at the chosen cutoff.
-    test_vecs = np.load(OUT_DIR / "banking77_test_embeddings.npy") \
-        if (OUT_DIR / "banking77_test_embeddings.npy").exists() else None
+    test_vecs = (
+        np.load(OUT_DIR / "banking77_test_embeddings.npy")
+        if (OUT_DIR / "banking77_test_embeddings.npy").exists()
+        else None
+    )
     if test_vecs is None:
         from sentence_transformers import SentenceTransformer as ST
+
         test_texts = ds["test"]["text"]
-        test_vecs = ST(MODEL_NAME).encode(test_texts, batch_size=64,
-                                          normalize_embeddings=True, show_progress_bar=False)
+        test_vecs = ST(MODEL_NAME).encode(
+            test_texts,
+            batch_size=64,
+            normalize_embeddings=True,
+            show_progress_bar=False,
+        )
     test_labels = np.array(ds["test"]["label"])
     test_scores, test_preds = search(test_vecs)
     rate, acc, lw = evaluate(test_scores, test_preds, test_labels, chosen, lost_id)
     print("\n=== Test set (reported once, at the chosen cutoff) ===")
-    print(f"Answered: {rate * 100:.1f}%   Accuracy on answered: {acc * 100:.1f}%   "
-          f"Confident card_lost wrong: {lw}")
+    print(
+        f"Answered: {rate * 100:.1f}%   Accuracy on answered: {acc * 100:.1f}%   "
+        f"Confident card_lost wrong: {lw}"
+    )
     print(f"Clarifying question for the other {(1 - rate) * 100:.1f}% of messages.")
 
 
