@@ -141,10 +141,10 @@ def tokenize_texts(
 
     return tokenizer(
         texts,
-        padding=True,          # pad shorter messages to same length
-        truncation=True,       # cut messages longer than max_length
+        padding=True,  # pad shorter messages to same length
+        truncation=True,  # cut messages longer than max_length
         max_length=max_length,
-        return_tensors="pt",   # return PyTorch tensors (pt), not lists
+        return_tensors="pt",  # return PyTorch tensors (pt), not lists
     )
 
 

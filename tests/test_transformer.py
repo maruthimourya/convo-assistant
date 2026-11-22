@@ -12,14 +12,13 @@ you don't hit the real API, you just verify the wiring is correct.
 
 import pytest
 import torch
+from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
 from convo_assistant.intent.transformer import (
     IntentDataset,
-    tokenize_texts,
     predict,
+    tokenize_texts,
 )
-from transformers import AutoTokenizer, AutoModelForSequenceClassification
-
 
 # A tiny random model for fast tests (no real DistilBERT download)
 TINY_MODEL = "hf-internal-testing/tiny-random-DistilBertForSequenceClassification"

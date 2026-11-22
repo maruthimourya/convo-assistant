@@ -74,7 +74,7 @@ def main() -> None:
     print("\n🏋️  Fine-tuning DistilBERT (3 epochs)...")
     print("   This takes ~5-15 minutes on an M5 Mac.\n")
     t0 = time.time()
-    epoch_losses = fine_tune(
+    fine_tune(
         model,
         train_dataset,
         epochs=3,
@@ -94,14 +94,16 @@ def main() -> None:
 
     print(f"\n📊 Transformer accuracy: {metrics['accuracy']:.4f}")
     print(f"   ({metrics['accuracy'] * 100:.1f}% of 3,080 test messages)")
-    print(f"\nPer-intent Precision / Recall / F1:")
+    print("\nPer-intent Precision / Recall / F1:")
     print(metrics["report_str"])
 
     # ── Step 7: Confusion matrix ─────────────────────────────
     out_dir = Path("outputs")
     out_dir.mkdir(exist_ok=True)
     cm_path = plot_confusion_matrix(
-        test_labels, y_pred, label_names=names,
+        test_labels,
+        y_pred,
+        label_names=names,
         save_path=out_dir / "confusion_matrix_transformer.png",
     )
 
@@ -128,7 +130,7 @@ def main() -> None:
         print("\n  🤔 Baseline held its ground — try more epochs or a larger model.")
 
     print(f"\n  Confusion matrix: {cm_path}")
-    print(f"  Saved model:      models/intent-distilbert/")
+    print("  Saved model:      models/intent-distilbert/")
     print("\n  The saved model can be loaded later with:")
     print("    from convo_assistant.intent.transformer import load_saved_model")
     print('    model, tokenizer = load_saved_model("models/intent-distilbert")')
