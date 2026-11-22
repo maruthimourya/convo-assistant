@@ -21,7 +21,7 @@ from pathlib import Path
 import numpy as np
 from sentence_transformers import SentenceTransformer
 
-from convo_assistant.intent.dataset import load_banking77, label_names
+from convo_assistant.intent.dataset import label_names, load_banking77
 
 MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 EMBEDDINGS_PATH = Path("outputs/banking77_train_embeddings.npy")

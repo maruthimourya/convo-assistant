@@ -20,9 +20,8 @@ Run from the project folder:
 from pathlib import Path
 
 import numpy as np
-from sentence_transformers import SentenceTransformer
 
-from convo_assistant.intent.dataset import load_banking77, label_names
+from convo_assistant.intent.dataset import label_names, load_banking77
 
 MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 OUT_DIR = Path("outputs")
@@ -47,7 +46,6 @@ def main() -> None:
 
     all_vecs = np.load(OUT_DIR / "banking77_train_embeddings.npy")
     all_labels = np.load(OUT_DIR / "banking77_train_labels.npy")
-    all_texts = ds["train"]["text"]
 
     # 1. Split the training data, not the test data.
     rng = np.random.default_rng(SEED)
