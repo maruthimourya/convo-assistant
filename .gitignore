@@ -11,3 +11,6 @@ wheels/
 .env
 .venv/
 __pycache__/
+
+# Trained model weights (too large for git)
+models/

@@ -8,10 +8,16 @@ authors = [
 ]
 requires-python = ">=3.15"
 dependencies = [
+    "accelerate>=1.16.0",
+    "datasets>=5.2.0",
     "fastapi>=0.165.0",
+    "matplotlib>=3.11.2",
     "openai>=3.57.0",
     "pydantic>=2.14.4",
     "python-dotenv>=1.2.4",
+    "scikit-learn>=1.9.1",
+    "torch>=2.15.0",
+    "transformers>=5.23.0",
     "uvicorn>=0.54.0",
 ]
 
