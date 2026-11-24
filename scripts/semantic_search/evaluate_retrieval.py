@@ -15,7 +15,7 @@ Kotlin view:
   val hit = top.any { trainLabels[it] == trueLabel }
 
 Run from the project folder:
-  uv run python scripts/evaluate_retrieval.py > outputs/eval_retrieval.txt 2>&1
+  uv run python scripts/semantic_search/evaluate_retrieval.py > outputs/eval_retrieval.txt 2>&1
 
 Note: hit@1 here equals the top-1 accuracy printed by evaluate_semantic.py.
 """
@@ -23,7 +23,7 @@ Note: hit@1 here equals the top-1 accuracy printed by evaluate_semantic.py.
 import numpy as np
 from sentence_transformers import SentenceTransformer
 
-from convo_assistant.intent.dataset import load_banking77
+from convo_assistant.shared.dataset import load_banking77
 
 MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 OUT_DIR = "outputs"

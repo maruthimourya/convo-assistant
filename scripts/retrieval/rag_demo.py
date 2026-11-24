@@ -2,10 +2,10 @@
 
 Needs GROQ_API_KEY in .env (or LLM_PROVIDER=ollama with Ollama running).
 Run from the project folder:
-  uv run python scripts/rag_demo.py
+  uv run python scripts/retrieval/rag_demo.py
 """
 
-from convo_assistant.rag.answer import answer
+from convo_assistant.retrieval.answer import answer
 
 QUESTIONS = [
     "how much money can I take out in a day",

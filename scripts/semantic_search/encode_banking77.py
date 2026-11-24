@@ -7,7 +7,7 @@ What it does (Kotlin view):
   save the result to disk so we only pay this cost once
 
 Run from the project folder:
-  uv run python scripts/encode_banking77.py
+  uv run python scripts/semantic_search/encode_banking77.py
 
 Output:
   outputs/banking77_train_embeddings.npy  (shape: 10003 x 384)
@@ -19,7 +19,7 @@ from pathlib import Path
 import numpy as np
 from sentence_transformers import SentenceTransformer
 
-from convo_assistant.intent.dataset import load_banking77
+from convo_assistant.shared.dataset import load_banking77
 
 # A small pretrained sentence-transformer (about 90 MB).
 # Each sentence becomes a list of 384 numbers.

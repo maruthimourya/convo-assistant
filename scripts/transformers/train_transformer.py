@@ -4,7 +4,7 @@ train_transformer.py — Fine-tune DistilBERT on Banking77 and
 compare against the TF-IDF baseline.
 
 Run with:
-    uv run python scripts/train_transformer.py
+    uv run python scripts/transformers/train_transformer.py
 
 Takes ~5-15 minutes on an M5 Mac (uses MPS GPU acceleration).
 """
@@ -12,9 +12,9 @@ Takes ~5-15 minutes on an M5 Mac (uses MPS GPU acceleration).
 import time
 from pathlib import Path
 
-from convo_assistant.intent.dataset import describe, label_names, load_banking77
-from convo_assistant.intent.evaluate import compute_metrics, plot_confusion_matrix
-from convo_assistant.intent.transformer import (
+from convo_assistant.shared.dataset import describe, label_names, load_banking77
+from convo_assistant.shared.evaluate import compute_metrics, plot_confusion_matrix
+from convo_assistant.transformers.transformer import (
     IntentDataset,
     fine_tune,
     load_model_and_tokenizer,
@@ -132,7 +132,7 @@ def main() -> None:
     print(f"\n  Confusion matrix: {cm_path}")
     print("  Saved model:      models/intent-distilbert/")
     print("\n  The saved model can be loaded later with:")
-    print("    from convo_assistant.intent.transformer import load_saved_model")
+    print("    from convo_assistant.transformers.transformer import load_saved_model")
     print('    model, tokenizer = load_saved_model("models/intent-distilbert")')
 
 

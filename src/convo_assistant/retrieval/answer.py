@@ -23,7 +23,7 @@ Kotlin view:
 """
 
 from convo_assistant.llm import make_llm
-from convo_assistant.rag.search import search
+from convo_assistant.retrieval.search import search
 
 SYSTEM = (
     "You are a banking support assistant. Answer the question using ONLY the "

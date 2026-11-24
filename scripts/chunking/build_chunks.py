@@ -3,14 +3,14 @@
 Each line is one chunk: {"text", "section", "source", "index"}.
 JSONL (one JSON object per line) is easy to read back one chunk at a time.
 
-Run:  PYTHONPATH=src python3 scripts/build_chunks.py
+Run:  PYTHONPATH=src python3 scripts/chunking/build_chunks.py
 """
 
 import json
 from dataclasses import asdict
 from pathlib import Path
 
-from convo_assistant.rag.chunking import chunk_markdown
+from convo_assistant.chunking.chunking import chunk_markdown
 
 POLICY_DIR = Path("data/policies")
 OUT = Path("outputs/chunks.jsonl")

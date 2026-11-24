@@ -1,10 +1,10 @@
 """search_chunks.py - try the retrieval step on a few questions.
 
 Run from the project folder:
-  uv run python scripts/search_chunks.py
+  uv run python scripts/retrieval/search_chunks.py
 """
 
-from convo_assistant.rag.search import search
+from convo_assistant.retrieval.search import search
 
 QUERIES = [
     "how much money can I take out in a day",  # no word "withdraw" -> tests meaning

@@ -2,7 +2,7 @@
 search.py - the retrieval step: find the chunks most relevant to a question.
 
 Week 4's semantic search, pointed at DOCUMENT CHUNKS. The chunk vectors are
-PRECOMPUTED (see scripts/encode_chunks.py) and loaded from disk; only the
+PRECOMPUTED (see scripts/retrieval/encode_chunks.py) and loaded from disk; only the
 query is embedded live, because it's new every time.
 
 Pipeline:
@@ -46,13 +46,13 @@ def _store() -> tuple[list[dict], np.ndarray]:
     if not EMBEDDINGS_PATH.exists():
         raise FileNotFoundError(
             f"{EMBEDDINGS_PATH} not found. Build it first:\n"
-            f"  uv run python scripts/encode_chunks.py"
+            f"  uv run python scripts/retrieval/encode_chunks.py"
         )
     vectors = np.load(EMBEDDINGS_PATH)
     if len(vectors) != len(chunks):
         raise ValueError(
             f"{len(vectors)} vectors but {len(chunks)} chunks. "
-            f"Re-run scripts/encode_chunks.py after changing chunks.jsonl."
+            f"Re-run scripts/retrieval/encode_chunks.py after changing chunks.jsonl."
         )
     return chunks, vectors
 

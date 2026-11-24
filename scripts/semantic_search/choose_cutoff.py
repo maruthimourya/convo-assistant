@@ -14,14 +14,14 @@ The rule is fixed before we look at results:
   accuracy on answered >= 95%  AND  zero confident card_lost mistakes on validation.
 
 Run from the project folder:
-  uv run python scripts/choose_cutoff.py > outputs/choose_cutoff.txt 2>&1
+  uv run python scripts/semantic_search/choose_cutoff.py > outputs/choose_cutoff.txt 2>&1
 """
 
 from pathlib import Path
 
 import numpy as np
 
-from convo_assistant.intent.dataset import label_names, load_banking77
+from convo_assistant.shared.dataset import label_names, load_banking77
 
 MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 OUT_DIR = Path("outputs")

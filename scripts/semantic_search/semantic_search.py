@@ -6,8 +6,8 @@ Kotlin view:
   return scored.sortedByDescending { it.score }.take(5)
 
 Run from the project folder (default query is "I lost my card"):
-  uv run python scripts/semantic_search.py
-  uv run python scripts/semantic_search.py "my card was eaten by the atm"
+  uv run python scripts/semantic_search/semantic_search.py
+  uv run python scripts/semantic_search/semantic_search.py "my card was eaten by the atm"
 """
 
 import sys
@@ -16,7 +16,7 @@ from pathlib import Path
 import numpy as np
 from sentence_transformers import SentenceTransformer
 
-from convo_assistant.intent.dataset import label_names, load_banking77
+from convo_assistant.shared.dataset import label_names, load_banking77
 
 MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 OUT_DIR = Path("outputs")

@@ -3,7 +3,7 @@
 train_baseline.py — Run the full TF-IDF + Logistic Regression pipeline.
 
 This is the "main()" of Week 3.  Run it with:
-    uv run python scripts/train_baseline.py
+    uv run python scripts/classifiers/train_baseline.py
 
 It will:
   1. Download Banking77 (or load from cache)
@@ -18,9 +18,9 @@ main() that wires everything together and runs it.
 import time
 from pathlib import Path
 
-from convo_assistant.intent.baseline import build_tfidf_lr_pipeline, train
-from convo_assistant.intent.dataset import describe, label_names, load_banking77
-from convo_assistant.intent.evaluate import compute_metrics, plot_confusion_matrix
+from convo_assistant.classifiers.baseline import build_tfidf_lr_pipeline, train
+from convo_assistant.shared.dataset import describe, label_names, load_banking77
+from convo_assistant.shared.evaluate import compute_metrics, plot_confusion_matrix
 
 
 def main() -> None:

@@ -2,7 +2,7 @@
 
 from pathlib import Path
 
-from convo_assistant.rag.chunking import chunk_markdown
+from convo_assistant.chunking.chunking import chunk_markdown
 
 POLICY_DIR = Path("data/policies")
 
