@@ -10,8 +10,8 @@ Run from the project folder:
   uv run python scripts/semantic_search/encode_banking77.py
 
 Output:
-  outputs/banking77_train_embeddings.npy  (shape: 10003 x 384)
-  outputs/banking77_train_labels.npy      (shape: 10003, the intent id of each row)
+  outputs/semantic_search/banking77_train_embeddings.npy  (shape: 10003 x 384)
+  outputs/semantic_search/banking77_train_labels.npy      (shape: 10003, the intent id of each row)
 """
 
 from pathlib import Path
@@ -24,7 +24,7 @@ from convo_assistant.shared.dataset import load_banking77
 # A small pretrained sentence-transformer (about 90 MB).
 # Each sentence becomes a list of 384 numbers.
 MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
-OUT_DIR = Path("outputs")
+OUT_DIR = Path("outputs/semantic_search")
 
 
 def main() -> None:
@@ -45,7 +45,7 @@ def main() -> None:
         normalize_embeddings=True,
     )
 
-    OUT_DIR.mkdir(exist_ok=True)
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
     np.save(OUT_DIR / "banking77_train_embeddings.npy", embeddings)
     np.save(OUT_DIR / "banking77_train_labels.npy", labels)
     print(f"Saved embeddings with shape {embeddings.shape}")

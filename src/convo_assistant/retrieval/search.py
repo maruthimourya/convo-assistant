@@ -6,8 +6,8 @@ PRECOMPUTED (see scripts/retrieval/encode_chunks.py) and loaded from disk; only 
 query is embedded live, because it's new every time.
 
 Pipeline:
-  1. Load chunks (text + metadata) from outputs/chunks.jsonl.
-  2. Load their precomputed vectors from outputs/chunks_embeddings.npy.
+  1. Load chunks (text + metadata) from outputs/chunking/chunks.jsonl.
+  2. Load their precomputed vectors from outputs/retrieval/chunks_embeddings.npy.
   3. Embed the incoming question.
   4. Score every chunk by cosine similarity and return the top k.
 
@@ -24,8 +24,8 @@ import numpy as np
 from sentence_transformers import SentenceTransformer
 
 MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
-CHUNKS_PATH = Path("outputs/chunks.jsonl")
-EMBEDDINGS_PATH = Path("outputs/chunks_embeddings.npy")
+CHUNKS_PATH = Path("outputs/chunking/chunks.jsonl")
+EMBEDDINGS_PATH = Path("outputs/retrieval/chunks_embeddings.npy")
 
 
 @lru_cache(maxsize=1)

@@ -19,7 +19,7 @@ from sentence_transformers import SentenceTransformer
 from convo_assistant.shared.dataset import label_names, load_banking77
 
 MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
-OUT_DIR = Path("outputs")
+OUT_DIR = Path("outputs/semantic_search")
 TOP_K = 5
 
 

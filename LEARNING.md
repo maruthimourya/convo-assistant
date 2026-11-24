@@ -42,3 +42,12 @@ scripts under `scripts/<concept>/`.
 - `src/convo_assistant/shared/evaluate.py` — accuracy / confusion matrix
 - `src/convo_assistant/llm.py` — Groq / Ollama providers
 - `src/convo_assistant/api.py` — FastAPI app
+
+## Generated outputs
+Each concept writes its artifacts under `outputs/<concept>/` (the `.npy` vectors
+and `.txt` logs are gitignored; regenerate them by running the scripts):
+- `outputs/classifiers/`     — confusion_matrix.png, compare_methods.txt
+- `outputs/transformers/`    — confusion_matrix_transformer.png
+- `outputs/semantic_search/` — banking77 vectors + labels, eval / cutoff / confidence logs
+- `outputs/chunking/`        — chunks.jsonl
+- `outputs/retrieval/`       — chunks_embeddings.npy

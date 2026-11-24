@@ -12,7 +12,7 @@ Kotlin view:
   val accuracy = predictions.zip(trueLabels).count { (p, t) -> p == t } / size.toDouble()
 
 Run from the project folder:
-  uv run python scripts/semantic_search/evaluate_semantic.py > outputs/eval_semantic.txt 2>&1
+  uv run python scripts/semantic_search/evaluate_semantic.py > outputs/semantic_search/eval_semantic.txt 2>&1
 
 Compare with Week 3:
   TF-IDF + logistic regression: 85.8%
@@ -27,7 +27,7 @@ from sentence_transformers import SentenceTransformer
 from convo_assistant.shared.dataset import label_names, load_banking77
 
 MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
-OUT_DIR = Path("outputs")
+OUT_DIR = Path("outputs/semantic_search")
 WATCHED = ["lost_or_stolen_card", "card_not_working", "declined_card_payment"]
 
 

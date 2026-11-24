@@ -13,7 +13,7 @@ For each method we report:
 Kotlin view: run two classifiers over the same list and tally a confusion table.
 
 Run from the project folder:
-  uv run python scripts/classifiers/compare_methods.py > outputs/compare_methods.txt 2>&1
+  uv run python scripts/classifiers/compare_methods.py > outputs/classifiers/compare_methods.txt 2>&1
 """
 
 from pathlib import Path
@@ -25,7 +25,7 @@ from convo_assistant.classifiers.baseline import build_tfidf_lr_pipeline
 from convo_assistant.shared.dataset import label_names, load_banking77
 
 MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
-OUT_DIR = Path("outputs")
+OUT_DIR = Path("outputs/semantic_search")
 WATCHED = ["lost_or_stolen_card", "card_not_working", "declined_card_payment"]
 
 

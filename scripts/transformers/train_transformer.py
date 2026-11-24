@@ -98,8 +98,8 @@ def main() -> None:
     print(metrics["report_str"])
 
     # ── Step 7: Confusion matrix ─────────────────────────────
-    out_dir = Path("outputs")
-    out_dir.mkdir(exist_ok=True)
+    out_dir = Path("outputs/transformers")
+    out_dir.mkdir(parents=True, exist_ok=True)
     cm_path = plot_confusion_matrix(
         test_labels,
         y_pred,

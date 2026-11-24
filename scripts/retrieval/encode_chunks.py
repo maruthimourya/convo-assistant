@@ -7,7 +7,7 @@ searches don't recompute it every time.
 Run from the project folder (needs the embedding model):
   uv run python scripts/retrieval/encode_chunks.py
 
-Re-run this whenever outputs/chunks.jsonl changes, or the saved vectors go stale.
+Re-run this whenever outputs/chunking/chunks.jsonl changes, or the saved vectors go stale.
 """
 
 from pathlib import Path
@@ -18,7 +18,7 @@ from sentence_transformers import SentenceTransformer
 from convo_assistant.retrieval.search import load_chunks
 
 MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
-OUT = Path("outputs/chunks_embeddings.npy")
+OUT = Path("outputs/retrieval/chunks_embeddings.npy")
 
 
 def main() -> None:
@@ -28,7 +28,7 @@ def main() -> None:
     model = SentenceTransformer(MODEL_NAME)
     vecs = model.encode(texts, normalize_embeddings=True)
 
-    OUT.parent.mkdir(exist_ok=True)
+    OUT.parent.mkdir(parents=True, exist_ok=True)
     np.save(OUT, vecs)
     print(f"Saved {vecs.shape[0]} chunk vectors ({vecs.shape[1]} dims each) to {OUT}")
 

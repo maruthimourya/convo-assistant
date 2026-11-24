@@ -13,7 +13,7 @@ Kotlin view:
   val accuracy = answered.count { it.correct } / answered.size
 
 Run from the project folder:
-  uv run python scripts/semantic_search/check_confidence.py > outputs/check_confidence.txt 2>&1
+  uv run python scripts/semantic_search/check_confidence.py > outputs/semantic_search/check_confidence.txt 2>&1
 """
 
 from pathlib import Path
@@ -24,7 +24,7 @@ from sentence_transformers import SentenceTransformer
 from convo_assistant.shared.dataset import label_names, load_banking77
 
 MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
-OUT_DIR = Path("outputs")
+OUT_DIR = Path("outputs/semantic_search")
 WATCHED = ["lost_or_stolen_card", "card_not_working", "declined_card_payment"]
 CUTOFFS = [0.80, 0.85, 0.90]
 

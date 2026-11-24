@@ -11,7 +11,7 @@ Usage:
   classify_intent("I lost my card")   # -> "lost_or_stolen_card"
   classify_intent("blah blah")        # -> None (ask a clarifying question)
 
-Needs outputs/banking77_train_embeddings.npy and outputs/banking77_train_labels.npy,
+Needs outputs/semantic_search/banking77_train_embeddings.npy and outputs/semantic_search/banking77_train_labels.npy,
 created by scripts/semantic_search/encode_banking77.py. Run from the project folder.
 """
 
@@ -24,8 +24,8 @@ from sentence_transformers import SentenceTransformer
 from convo_assistant.shared.dataset import label_names, load_banking77
 
 MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
-EMBEDDINGS_PATH = Path("outputs/banking77_train_embeddings.npy")
-LABELS_PATH = Path("outputs/banking77_train_labels.npy")
+EMBEDDINGS_PATH = Path("outputs/semantic_search/banking77_train_embeddings.npy")
+LABELS_PATH = Path("outputs/semantic_search/banking77_train_labels.npy")
 
 # Chosen on validation data (see scripts/semantic_search/choose_cutoff.py).
 # Below this score we ask a clarifying question instead of guessing.

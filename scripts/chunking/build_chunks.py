@@ -1,4 +1,4 @@
-"""build_chunks.py - chunk every policy doc and save to outputs/chunks.jsonl.
+"""build_chunks.py - chunk every policy doc and save to outputs/chunking/chunks.jsonl.
 
 Each line is one chunk: {"text", "section", "source", "index"}.
 JSONL (one JSON object per line) is easy to read back one chunk at a time.
@@ -13,7 +13,7 @@ from pathlib import Path
 from convo_assistant.chunking.chunking import chunk_markdown
 
 POLICY_DIR = Path("data/policies")
-OUT = Path("outputs/chunks.jsonl")
+OUT = Path("outputs/chunking/chunks.jsonl")
 
 
 def main() -> None:
@@ -21,7 +21,7 @@ def main() -> None:
     for path in sorted(POLICY_DIR.glob("*.md")):
         chunks += chunk_markdown(path.read_text(), path.name)  # default 500 / 50
 
-    OUT.parent.mkdir(exist_ok=True)
+    OUT.parent.mkdir(parents=True, exist_ok=True)
     with OUT.open("w") as f:
         for c in chunks:
             f.write(json.dumps(asdict(c)) + "\n")

@@ -14,7 +14,7 @@ import pytest
 import torch
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
-from convo_assistant.intent.transformer import (
+from convo_assistant.transformers.transformer import (
     IntentDataset,
     predict,
     tokenize_texts,
