@@ -19,5 +19,5 @@ def run(max_chars: int, overlap: int) -> None:
 
 
 if __name__ == "__main__":
-    run(max_chars=500, overlap=50)   # normal
-    run(max_chars=200, overlap=40)   # forced split, to see overlap
+    run(max_chars=500, overlap=50)  # normal
+    run(max_chars=200, overlap=40)  # forced split, to see overlap

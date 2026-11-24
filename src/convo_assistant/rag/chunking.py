@@ -28,10 +28,10 @@ from dataclasses import dataclass
 
 @dataclass
 class Chunk:
-    text: str       # the piece of text to embed
-    section: str    # the heading it came from (metadata)
-    source: str     # the file it came from (metadata)
-    index: int      # position of this chunk within the document
+    text: str  # the piece of text to embed
+    section: str  # the heading it came from (metadata)
+    source: str  # the file it came from (metadata)
+    index: int  # position of this chunk within the document
 
 
 def split_sections(markdown: str) -> list[tuple[str, str]]:
@@ -91,6 +91,8 @@ def chunk_markdown(
     index = 0
     for heading, body in split_sections(markdown):
         for piece in _split_long(body, max_chars, overlap):
-            chunks.append(Chunk(text=piece, section=heading, source=source, index=index))
+            chunks.append(
+                Chunk(text=piece, section=heading, source=source, index=index)
+            )
             index += 1
     return chunks

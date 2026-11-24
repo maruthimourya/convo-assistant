@@ -11,7 +11,7 @@ QUESTIONS = [
     "how much money can I take out in a day",
     "my card got stolen, what do I do",
     "do I pay extra for spending abroad",
-    "what's the weather tomorrow",   # off-topic -> should refuse
+    "what's the weather tomorrow",  # off-topic -> should refuse
     "do I pay extra to check my balance abroad",
 ]
 

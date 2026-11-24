@@ -7,7 +7,7 @@ Run from the project folder:
 from convo_assistant.rag.search import search
 
 QUERIES = [
-    "how much money can I take out in a day",   # no word "withdraw" -> tests meaning
+    "how much money can I take out in a day",  # no word "withdraw" -> tests meaning
     "my card got stolen last night",
     "why was my payment rejected",
     "do I pay extra for spending abroad",
